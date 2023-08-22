@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Ivan Reshetnikov",
   "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "nodemon index.js"
   },
