@@ -1,16 +1,15 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 
-const token = '6680971242:AAGW2SoeQjcPyrXIgsoRLrb4a-Xk9B_GbdM';
+const { token, PORT } = process.env;
 
 const bot = new TelegramBot(token, { polling: false });
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
-const PORT = 8000;
 
 const webAppUrl = 'https://bright-speculoos-9a47ae.netlify.app/';
 
