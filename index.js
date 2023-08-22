@@ -3,15 +3,13 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const { token, PORT } = process.env;
+const { token, PORT, webAppUrl } = process.env;
 
 const bot = new TelegramBot(token, { polling: false });
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
-const webAppUrl = 'https://bright-speculoos-9a47ae.netlify.app/';
 
 bot.on('message', async msg => {
   const chatId = msg.chat.id;
@@ -21,7 +19,7 @@ bot.on('message', async msg => {
     await bot.sendMessage(chatId, 'Hello Human!', {
       reply_markup: {
         keyboard: [
-          [{ text: 'Fill the form!', web_app: { url: webAppUrl + 'form' } }],
+          [{ text: 'Fill the form!', web_app: { url: webAppUrl + '/form' } }],
         ],
 
         inline_keyboard: [[{ text: 'Tap here!', web_app: { url: webAppUrl } }]],
