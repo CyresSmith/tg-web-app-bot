@@ -5,15 +5,15 @@ require('dotenv').config();
 
 const { token, PORT, webAppUrl } = process.env;
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: false });
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
 bot.on('message', async msg => {
-  const chatId = msg?.chat.id;
-  const text = msg?.text;
+  const chatId = msg.chat.id;
+  const text = msg.text;
 
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Hello Human!', {
@@ -21,14 +21,14 @@ bot.on('message', async msg => {
         keyboard: [
           [{ text: 'Fill the form!', web_app: { url: webAppUrl + '/form' } }],
         ],
+
+        inline_keyboard: [[{ text: 'Tap here!', web_app: { url: webAppUrl } }]],
       },
     });
 
     await bot.sendMessage(chatId, 'Welcome to our app !', {
       reply_markup: {
-        inline_keyboard: [
-          [{ text: 'Tap here for shopping!', web_app: { url: webAppUrl } }],
-        ],
+        inline_keyboard: [[{ text: 'Tap here!', web_app: { url: webAppUrl } }]],
       },
     });
   }
@@ -47,9 +47,6 @@ bot.on('message', async msg => {
     } catch (error) {}
   }
 });
-console.log('🚀 ~ file: index.js:48 ~ msg:', msg);
-console.log('🚀 ~ file: index.js:48 ~ msg:', msg);
-console.log('🚀 ~ file: index.js:48 ~ msg:', msg);
 
 app.post('/web-data', async (req, res) => {
   const { queryID, products, totalPrice } = req.body;
