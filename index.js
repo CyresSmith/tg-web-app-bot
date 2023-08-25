@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const { token, PORT, webAppUrl } = process.env;
 
-const bot = new TelegramBot(token, { polling: false });
+const bot = new TelegramBot(token, { polling: true });
 const app = express();
 
 app.use(express.json());
@@ -13,9 +13,7 @@ app.use(cors());
 
 bot.on('message', async msg => {
   const chatId = msg.chat.id;
-  console.log('🚀 ~ file: index.js:16 ~ chatId:', chatId);
   const text = msg.text;
-  console.log('🚀 ~ file: index.js:17 ~ text:', text);
 
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Hello Human!', {
