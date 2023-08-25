@@ -14,7 +14,7 @@ app.use(cors());
 bot.on('message', async msg => {
   const chatId = msg.chat.id;
   const text = msg.text;
-  console.log('🚀 ~ file: index.js:17 ~ msg:', msg);
+  console.log('🚀 ~ file: index.js:17 ~ msg.text:', msg.text);
 
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Hello Human!', {
